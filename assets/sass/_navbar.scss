@@ -1,0 +1,132 @@
+header {
+    position: relative;
+
+   height: 110px;
+    background-color: #112110;
+    
+    z-index: 1;
+    .beny-custom-log-link {
+ 
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 5%;
+      .beny-custom-log{
+        width: 100px;
+     
+        height: 100%;
+        object-fit: cover;
+      }
+
+    }
+ 
+
+    .top-menu {
+     
+        position: absolute;
+        top: 110px;
+      
+        
+       
+        left: 0;
+        right: 0;
+        display: none;
+      
+
+        .menu-item {
+            list-style: none;
+
+            .nav-link {
+                text-transform: capitalize;
+                padding: 15px;
+                font-weight: 900;
+                letter-spacing: 2px;
+                text-decoration: none;
+               color:#fff;
+
+
+            }
+        }
+    }
+    .burger {
+
+      .la-bars,
+      .la-times {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 15px;
+          color: #fff;
+          font-size: 3rem;
+          box-shadow: 1px 1px 1px rgba(230, 207, 76, 0.1), inset -1px -1px 1px rgba(230, 207, 76, 0.1);
+      }
+
+      .la-times {
+          display: none;
+      }
+  }
+}
+.show-nav {
+   
+ 
+
+  .top-menu{
+        
+          display: block;
+       
+          background-color: #fff;
+          .menu-item{
+         
+              transition:all .7s ease-out;
+              padding: 20px;
+              border-bottom: 1px solid grey;
+              .nav-link {
+                color:grey;
+              }
+          }
+
+          
+      }
+ 
+
+  .burger {
+      .la-bars {
+          display: none;
+      }
+
+      .la-times {
+          display: block;
+      }
+
+  }
+}
+@media screen and (min-width: 1024px) {
+  header{
+   
+    .beny-custom-log-link {
+      width:32%;
+    }
+    .top-menu{
+              min-height: 100px;
+            position: initial;
+            padding-top: 15px;
+          display: flex;
+          justify-content: end;
+          align-items: center;
+          padding-right: 20px;
+          .menu-item{
+              transform: initial;
+              padding-left: 35px;
+             
+             
+            }
+          }
+     
+      .burger{
+          display: none;
+      }
+  }
+  
+}

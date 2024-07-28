@@ -1,0 +1,79 @@
+.site__chantiers {
+
+    .site__heading {
+
+        margin: 20px !important;
+    }
+
+    .all__Projects {
+        .project {
+            margin: 3rem;
+
+            background-color: #E6CF4C;
+            overflow: hidden;
+
+            position: relative;
+            border-radius: 5px 5px 0 0;
+
+            .post__thumbnail {
+                height: 200px;
+                width: 100%;
+            }
+
+            .project__title {
+                padding: 15px 0 15px 15px;
+
+                a {
+                    font-size: 1.3rem;
+                    font-weight: 500 !important;
+
+                }
+            }
+        }
+    }
+
+    .site__navigation {
+        text-align: center;
+        margin-bottom: 20px;
+
+       .site__navigation__prev,
+        .site__navigation__next {
+            a{
+
+                background-color: rgba(197, 197, 197, 0.5);
+                padding: 5px 10px;
+    
+                text-align: center;
+                border-radius: 25px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:768px) {
+    .site__chantiers {
+
+        .all__Projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 15px;
+
+        }
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .site__chantiers {
+        width: 85%;
+        margin: auto;
+
+        .all__Projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+
+        }
+    }
+}

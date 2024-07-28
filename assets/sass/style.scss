@@ -1,0 +1,23 @@
+@import "navbar";
+@import "shapping";
+@import "posts";
+@import "archive";
+@import "single";
+
+
+* {
+    border: border-box;
+    padding: 0;
+    margin: 0;
+
+}
+
+ul>li {
+    list-style: none;
+}
+
+// img{
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+// }

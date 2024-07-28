@@ -1,0 +1,28 @@
+.cards-wp{
+  
+  display: grid;
+  grid-template-columns:repeat(4,1fr) ;
+  padding-bottom: 15px;
+  place-items: center;
+  gap: 30px;
+
+}
+.cards-wp> .card{
+    border: 1px solid #000;
+    text-align: center;
+   width: 60%;
+
+ 
+}
+.cards-wp> .card> .card-image-top{
+    object-fit: cover;
+   width: 100%;
+   height: 100%;
+}
+
+h5{
+    color: brown;
+}
+.card-link{
+    padding-bottom: 15px;
+}
