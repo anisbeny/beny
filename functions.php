@@ -1,109 +1,124 @@
 <?php
-function beny_supports(){
+/**
+ * Fonctions et définitions du thème Beny
+ *
+ * @package Beny
+ */
 
-    add_theme_support( 'title-tag' );
-    add_theme_support(
-    	'custom-logo',
-				[
-					'height'      => 100,
-					'width'       => 150,
-					'flex-height' => true,
-					'flex-width'  => true,
-				]
-    );
+// Empêcher l'accès direct au fichier
+if (!defined('ABSPATH')) {
+    exit; // Sortie si accédé directement
+}
+
+/**
+ * Configuration des fonctionnalités du thème
+ */
+function beny_supports() {
+    add_theme_support('title-tag');
+    add_theme_support('custom-logo', [
+        'height'      => 100,
+        'width'       => 150,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
     add_theme_support('post-thumbnails');
     add_theme_support('menus');
-    register_nav_menu('header', 'En tête de page');
-    register_nav_menu('footer', 'Pied de page');
+    register_nav_menus([
+        'header' => __('En tête de page', 'beny'),
+        'footer' => __('Pied de page', 'beny')
+    ]);
 }
 
-function beny_register_assets(){
-    wp_register_style('icones', 'https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css');
-    wp_register_style('archive_css', get_template_directory_uri() . '/assets/css/styles.css');
-    wp_register_style('main_css', get_template_directory_uri() . '/assets/css/style.css');
-    wp_register_script('main_js', get_template_directory_uri() .'/assets/js/script.js', [], false, true);
-    wp_register_script('btnCall_js', get_template_directory_uri() .'/assets/js/call.js', [], false, true);
-     wp_enqueue_style('icones');
-    wp_enqueue_style('main_css');
-    wp_enqueue_style('archive_css');
-    wp_enqueue_script('main_js');
-    wp_enqueue_script('btnCall_js');
+/**
+ * Enregistrement et chargement des assets
+ */
+function beny_register_assets() {
+    $theme_version = wp_get_theme()->get('Version');
 
+    // Styles
+    wp_enqueue_style('icones', 'https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css', [], null);
+    wp_enqueue_style('archive_css', get_template_directory_uri() . '/assets/css/styles.css', [], $theme_version);
+    wp_enqueue_style('main_css', get_template_directory_uri() . '/assets/css/style.css', [], $theme_version);
+
+    // Scripts
+    wp_enqueue_script('main_js', get_template_directory_uri() . '/assets/js/script.js', [], $theme_version, true);
+    wp_enqueue_script('btnCall_js', get_template_directory_uri() . '/assets/js/call.js', [], $theme_version, true);
 }
-function beny_title_separator (){
+
+/**
+ * Personnalisation du séparateur de titre
+ */
+function beny_title_separator() {
     return '|';
 }
-function beny_document_title_parts($title){
-   unset($title['tagline']);
-   return $title;
+
+/**
+ * Suppression du tagline du titre du document
+ */
+function beny_document_title_parts($title) {
+    unset($title['tagline']);
+    return $title;
 }
-function beny_menu_class($classes)
-{
-    $classes[] ='nav-item';
+
+/**
+ * Ajout de classes aux éléments de menu
+ */
+function beny_menu_class($classes) {
+    $classes[] = 'nav-item';
     return $classes;
 }
-function beny_menu_link_class($attrs)
-{
-    $attrs['class']= 'nav-link';
+
+/**
+ * Ajout de classe aux liens de menu
+ */
+function beny_menu_link_class($attrs) {
+    $attrs['class'] = isset($attrs['class']) ? $attrs['class'] . ' nav-link' : 'nav-link';
     return $attrs;
 }
-//Ajouter une classe au logo
-function beny_logo_class( $html ) {
 
-    $html = str_replace( 'custom-logo', 'beny-custom-log', $html );
-    $html = str_replace( 'custom-logo-link', 'beny-custom-log', $html );
-
+/**
+ * Modification des classes du logo
+ */
+function beny_logo_class($html) {
+    $html = str_replace(['custom-logo', 'custom-logo-link'], 'beny-custom-logo', $html);
     return $html;
 }
-function beny_widgets(){
 
-    register_sidebar([
-        'id' => 'footer_left',
-        'name' => 'Footer gauche',
-        'description' => 'Cette zone se situe dans le footer à gauche',
-        'before_widget' => '<aside>',
-        'after_widget' => '</aside>',
-        'before_title' => '<h1>',
-        'after_title' => '</h1>'
-    ]);
-    register_sidebar([
-        'id' => 'footer_center',
-        'name' => 'Footer centre',
-        'description' => 'Cette zone se situe dans le footer au centre',
-        'before_widget' => '<aside>',
-        'after_widget' => '</aside>',
-        'before_title' => '<h1>',
-        'after_title' => '</h1>'
-    ]);
-    register_sidebar([
-        'id' => 'footer_right',
-        'name' => 'Footer droite',
-        'description' => 'Cette zone se situe dans le footer à droite',
-        'before_widget' => '<aside>',
-        'after_widget' => '</aside>',
-        'before_title' => '<h1>',
-        'after_title' => '</h1>'
-    ]);
+/**
+ * Enregistrement des zones de widgets
+ */
+function beny_widgets() {
+    $footer_widget_areas = [
+        'footer_left'   => __('Footer gauche', 'beny'),
+        'footer_center' => __('Footer centre', 'beny'),
+        'footer_right'  => __('Footer droite', 'beny'),
+    ];
 
+    foreach ($footer_widget_areas as $id => $name) {
+        register_sidebar([
+            'id'            => $id,
+            'name'          => $name,
+            'description'   => sprintf(__('Cette zone se situe dans le footer (%s)', 'beny'), $name),
+            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title'  => '<h2 class="widget-title">',
+            'after_title'   => '</h2>',
+        ]);
+    }
 }
-/* Personnalisation du thème */
+
+// Chargement des fichiers supplémentaires
 require_once get_template_directory() . '/include/costomize-theme.php';
-
-
-
-// Type de contenu personnalisé "chantiers"
 require_once get_template_directory() . '/include/projects.php';
-
-//Déclarer une taxonomie
 // require_once get_template_directory() . '/include/taxonomy.php';
 
-
+// Hooks
 add_action('after_setup_theme', 'beny_supports');
 add_action('wp_enqueue_scripts', 'beny_register_assets');
 add_action('widgets_init', 'beny_widgets');
 
 add_filter('document_title_separator', 'beny_title_separator');
 add_filter('document_title_parts', 'beny_document_title_parts');
-add_filter( 'get_custom_logo', 'beny_logo_class' );
+add_filter('get_custom_logo', 'beny_logo_class');
 add_filter('nav_menu_css_class', 'beny_menu_class');
 add_filter('nav_menu_link_attributes', 'beny_menu_link_class');

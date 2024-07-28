@@ -1,5 +1,17 @@
 /*
-Theme Name: beny
-Author: Anis Ben Youssef
-Version: 1.0
+Theme Name: Beny
+Theme URI: https://github.com/anisbeny/beny
+Description: Thème personnalisable pour artisan 
+Author: Anis Beny
+Author URI: https://github.com/anisbeny
+
+Version: 1.0.0
+License: GNU General Public License v2 or later
+
+Text Domain: beny
 */
+
+/* Styles personnalisés */
+body {
+    font-family: 'Arial', sans-serif;
+}
