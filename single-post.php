@@ -1,31 +1,23 @@
 <?php get_header(); ?>
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-        <article class="post">
-            <?php if (has_post_thumbnail()) : ?>
-                <div class="post__thumbnail">
-                    <img src="<?php the_post_thumbnail_url(); ?>" alt="" style="width:100%; height=auto;">
-                </div>
-            <?php endif; ?>
+<main id="main" class="site-main">
 
-            <h1><?php the_title(); ?></h1>
-            <div class="post__meta">
-                <?php echo get_avatar(get_the_author_meta('ID'), 40); ?>
-                <p>
-                    Publié le <?php the_date(); ?>
-                    par <?php the_author(); ?>
-                    Dans la catégorie <?php the_category(); ?>
-                    Avec les étiquettes <?php the_tags(); ?>
-                </p>
-            </div>
+    <?php
+    while ( have_posts() ) :
+        the_post();
 
-            <div class="post__content">
-                <?php the_content(); ?>
+        get_template_part( 'template-parts/content', 'page' );
 
-            </div>
-        </article>
+        // If comments are open or we have at least one comment, load up the comment template.
+        if ( comments_open() || get_comments_number() ) :
+            comments_template();
+        endif;
 
-<?php endwhile;
-endif; ?>
+    endwhile; // End of the loop.
+    ?>
 
-<?php get_footer(); ?>
+</main>
+
+<?php
+
+get_footer();

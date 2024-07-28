@@ -31,7 +31,7 @@
     <i class="las la-times"></i>
     </div>
     </header>
-        <?php if ( function_exists('yoast_breadcrumb') ) {
+        <!-- <?php if ( function_exists('yoast_breadcrumb') ) {
         yoast_breadcrumb('<p id="breadcrumbs">','</p>');
-        } ?>
+        } ?> -->
     

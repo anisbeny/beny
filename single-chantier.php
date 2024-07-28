@@ -27,7 +27,7 @@
                        
                     </aside>
                     <div class="btn-devis">
-                        <a href="<?php echo get_permalink(24); ?>">Je souhaite un devis gratuit</a>
+                        <a href="<?php echo get_permalink(14); ?>">Je souhaite un devis gratuit</a>
 
                     </div>
                 </section>

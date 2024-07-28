@@ -4,32 +4,31 @@
                    grid-template-columns:repeat(4, 1fr);
                    gap:20px;">
 
-<?php if (have_posts()) : ?>
+<?php if (have_posts()) : 
+   if ( is_home() && ! is_front_page() ) :?>
    <article style= "display:flex;
                      justify-content:center;
                      align-items:center;
                      flex-direction:column;
                      gap:20px;">
-      <?php while (have_posts()) : the_post() ?>
-        
-      
-            <?php the_post_thumbnail('medium', ['class' =>'card-image-top', 'alt'=> '', 'style'=> 'height: auto;' ]) ?>
-           
+                     <header>
+                <h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+            </header>
             
-              
-               <h5 class="card-titile"><?php the_title() ?></h5>
-               <h6 class="card-subtitle"><?php the_category(', ') ?></h6>
-               <p class="card-dat">Ecrit le <?= get_the_date() ?><span class="author"> par <?php the_author() ?></span></p>
-               <p class="card-text"><?php the_excerpt() ?></p>
-               <a href="<?php the_permalink() ?>" class="card-link">voir plus</a>
+      <?php 
+      endif;
+      while (have_posts()) : the_post() 
         
+     
+         
+         get_template_part( 'template-parts/content', get_post_type() );
         
-      <?php endwhile; ?>
+       endwhile; 
    </article>
 
-<?php else : ?>
-   <p>Pas de contenu</p>
-<?php endif; ?>
+<?php else : 
+   get_template_part( 'template-parts/content', 'none' );
+endif; ?>
 </main>
 
 <?php get_footer();

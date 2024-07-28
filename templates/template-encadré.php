@@ -14,6 +14,8 @@
 <h1><?php the_title() ?></h1>
 
 <?php the_content() ?>
-<?php endwhile; endif; ?>
+<?php endwhile; 
+endif;
+ ?>
 </main>
 <?php get_footer() ?>
